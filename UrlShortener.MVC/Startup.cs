@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using UrlShortener.DAL;
+using UrlShorter.BLL;
 using UrlShorter.BLL.Abstractions;
 using UrlShorter.BLL.Services;
 
@@ -18,6 +19,8 @@ namespace UrlShortener.MVC
 
             services.AddHttpContextAccessor();
             services.AddTransient<IUserContext, UserContext>();
+
+            services.AddBLLServices(configuration);
         }
     }
 }
