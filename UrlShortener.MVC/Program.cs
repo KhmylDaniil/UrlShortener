@@ -1,9 +1,15 @@
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
+using UrlShortener.DAL;
+using UrlShortener.MVC;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
+Startup.ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
+
+Entry.MigrateDB(app.Services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -18,6 +24,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllerRoute(
