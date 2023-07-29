@@ -33,12 +33,16 @@ namespace UrlShorter.BLL.Handlers.UserHandlers
         {
             var existingUser = await _appDbContext.Users
                 .FirstOrDefaultAsync(x => x.Login == request.Login, cancellationToken)
-                ?? throw new ApplicationSystemBaseException("Логин не найден");
+                ?? throw new RequestValidationException("Логин не найден");
 
             if (!_passwordHasher.VerifyHash(request.Password, existingUser.PasswordHash))
-                throw new ApplicationSystemBaseException("Неверный пароль.");
+                throw new RequestValidationException("Неверный пароль.");
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, existingUser.Id.ToString()) };
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, existingUser.Id.ToString()),
+                new Claim(ClaimTypes.Role, Enum.GetName(existingUser.RoleType))
+            };
 
             ClaimsIdentity claimsIdentity = new(claims, "Cookies");
 

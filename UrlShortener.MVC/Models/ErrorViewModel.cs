@@ -1,9 +1,18 @@
 namespace UrlShortener.MVC.Models
 {
+    /// <summary>
+    /// Модель прерывающей выполнение приложения ошибки
+    /// </summary>
     public class ErrorViewModel
     {
-        public string? RequestId { get; set; }
+        /// <summary>
+        /// Сообщение об ошибке
+        /// </summary>
+        public string Message { get; set; }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public ErrorViewModel(Exception ex)
+        {
+            Message = ex.Message;
+        }
     }
 }

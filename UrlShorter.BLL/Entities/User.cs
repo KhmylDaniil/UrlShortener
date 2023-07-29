@@ -15,6 +15,7 @@ namespace UrlShorter.BLL.Entities
             Name = name;
             Login = login;
             PasswordHash = passwordHash;
+            RoleType = roleType;
             UrlRecords = new();
         }
 

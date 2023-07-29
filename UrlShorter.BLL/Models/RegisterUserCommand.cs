@@ -6,7 +6,7 @@ namespace UrlShorter.BLL.Models
     /// <summary>
     /// Команда создания пользователя
     /// </summary>
-    public class RegisterUserCommand : IRequest<Guid>
+    public class RegisterUserCommand : IRequest<Unit>
     {
         /// <summary>
         /// Имя пользователя

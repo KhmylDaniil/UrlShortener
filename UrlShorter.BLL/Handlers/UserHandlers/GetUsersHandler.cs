@@ -16,9 +16,9 @@ namespace UrlShorter.BLL.Handlers.UserHandlers
             _authorizationService.AuthorizationCheck(Constants.RoleType.Admin);
 
             var filter = _appDbContext.Users
-                .Where(u => request.Name == null || u.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase))
+                .Where(u => request.Name == null || u.Name.Contains(request.Name))
                 .Where(u => request.MinRegistrationDateTime == default || u.CreatedOn >= request.MinRegistrationDateTime)
-                .Where(u => request.MaxRegistrationDateTime == default || u.CreatedOn <= request.MaxRegistrationDateTime);
+                .Where(u => request.MaxRegistrationDateTime == default || u.CreatedOn <= request.MaxRegistrationDateTime.AddDays(1));
 
             return await filter.Select(x => new GetUsersResponse
             {
