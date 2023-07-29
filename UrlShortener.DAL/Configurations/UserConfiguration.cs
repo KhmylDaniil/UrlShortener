@@ -4,19 +4,26 @@ using UrlShorter.BLL.Entities;
 
 namespace UrlShortener.DAL.Configurations
 {
+    /// <summary>
+    /// Конфигурация пользователей
+    /// </summary>
     public class UserConfiguration : EntityBaseConfiguration<User>
     {
         public override void ConfigureChild(EntityTypeBuilder<User> builder)
         {
-            builder.Property(r => r.Name).IsRequired();
+            builder.Property(x => x.Name).IsRequired();
 
-            builder.Property(r => r.PasswordHash).IsRequired();
+            builder.Property(x => x.RoleType).IsRequired();
 
-            builder.HasMany(x => x.UrlRecords)
-                .WithOne(x => x.User)
-                .HasPrincipalKey(x => x.Id)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+            builder.Property(x => x.Login).IsRequired();
+
+            builder.Property(x => x.PasswordHash).IsRequired();
+
+            builder.Property(x => x.UrlRecordsCount).IsRequired();
+
+            builder.HasMany(u => u.UrlRecords)
+                .WithMany(ur => ur.Users)
+                .UsingEntity(x => x.ToTable("UsersUrlRecords"));
         }
     }
 }

@@ -4,19 +4,20 @@ using UrlShorter.BLL.Entities;
 
 namespace UrlShortener.DAL.Configurations
 {
+    /// <summary>
+    /// Конфигурация записей Url
+    /// </summary>
     public class UrlRecordConfiguration : EntityBaseConfiguration<UrlRecord>
     {
         public override void ConfigureChild(EntityTypeBuilder<UrlRecord> builder)
         {
             builder.Property(x => x.ShortUrl).IsRequired();
 
-            builder.Property(r => r.LongUrl).IsRequired();
+            builder.Property(x => x.LongUrl).IsRequired();
 
-            builder.HasOne(x => x.User)
-                .WithMany(x => x.UrlRecords)
-                .HasPrincipalKey(x => x.Id)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+            builder.HasMany(ur => ur.Users)
+                .WithMany(u => u.UrlRecords)
+                .UsingEntity(x => x.ToTable("UsersUrlRecords"));
         }
     }
 }

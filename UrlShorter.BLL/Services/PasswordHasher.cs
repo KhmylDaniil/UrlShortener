@@ -5,12 +5,16 @@ using UrlShorter.BLL.Exceptions;
 
 namespace UrlShorter.BLL.Services
 {
+    /// <summary>
+    /// Реализация сервиса хеширования паролей
+    /// </summary>
     public class PasswordHasher : IPasswordHasher
     {
         private readonly string _salt;
 
         public PasswordHasher(string salt) => _salt = salt;
 
+        /// <inheritdoc/>
         public string Hash(string password)
         {
             if (password == null)
@@ -28,6 +32,7 @@ namespace UrlShorter.BLL.Services
             return hashed;
         }
 
+        /// <inheritdoc/>
         public bool VerifyHash(string password, string hash)
         {
             if (password == null)

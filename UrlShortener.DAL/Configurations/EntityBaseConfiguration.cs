@@ -4,6 +4,10 @@ using UrlShorter.BLL.Entities;
 
 namespace UrlShortener.DAL.Configurations
 {
+    /// <summary>
+    /// Конфигурация базовой сущности
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности</typeparam>
     public abstract class EntityBaseConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : EntityBase
     {
@@ -13,6 +17,9 @@ namespace UrlShortener.DAL.Configurations
             ConfigureChild(builder);
         }
 
+        /// <summary>
+        /// Конфигурация для всех сущностей
+        /// </summary>
         public virtual void ConfigureBase(EntityTypeBuilder<TEntity> builder)
         {
             builder.HasKey(x => x.Id);

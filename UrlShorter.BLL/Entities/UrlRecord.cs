@@ -2,15 +2,25 @@
 
 namespace UrlShorter.BLL.Entities
 {
+    /// <summary>
+    /// Запись Url в базе данных
+    /// </summary>
     public class UrlRecord : EntityBase
     {
+        /// <summary>
+        /// Короткая запись
+        /// </summary>
         [StringLength(6)]
         public string ShortUrl { get; set; }
 
+        /// <summary>
+        /// Длинная запись
+        /// </summary>
         public string LongUrl { get; set; }
 
-        public Guid? UserId { get; set; }
-
-        public User? User { get; set; }
+        /// <summary>
+        /// Пользователи, запросившие создание данной записи 
+        /// </summary>
+        public List<User> Users { get; set; } = new();
     }
 }

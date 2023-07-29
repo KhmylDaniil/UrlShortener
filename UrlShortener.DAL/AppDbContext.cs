@@ -5,12 +5,18 @@ using UrlShorter.BLL.Entities;
 
 namespace UrlShortener.DAL
 {
+    /// <summary>
+    /// Контекст базы данных
+    /// </summary>
     public class AppDbContext : DbContext, IAppDbContext
     {
+        /// <inheritdoc/>
         public DbSet<User> Users { get; set; }
 
+        /// <inheritdoc/>
         public DbSet<UrlRecord> UrlRecords { get; set; }
 
+        /// <inheritdoc/>
         private readonly IUserContext _userContext;
 
         public AppDbContext(
@@ -25,12 +31,19 @@ namespace UrlShortener.DAL
         {
         }
 
+        /// <summary>
+        /// Метод для подтягивания конфигураций
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }
 
+        /// <summary>
+        /// Переопределенный метод записи в базу для автоматической записи полей в новых сущностях
+        /// </summary>
+        /// <returns></returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker.Entries()
