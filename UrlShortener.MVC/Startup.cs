@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using UrlShortener.DAL;
-using UrlShorter.BLL;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Services;
+using UrlShortener.BLL;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Services;
 
 namespace UrlShortener.MVC
 {

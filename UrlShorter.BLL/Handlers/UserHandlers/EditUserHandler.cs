@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Entities;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Entities;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик команды изменения пользователя
     /// </summary>
-    public class EditUserHandler : BaseHandler<EditUserCommand, Unit>
+    public sealed class EditUserHandler : BaseHandler<EditUserCommand, Unit>
     {
         private readonly IPasswordHasher _passwordHasher;
         public EditUserHandler(

@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик команды авторизации пользователя
     /// </summary>
-    public class LoginUserHandler : BaseHandler<LoginUserCommand, Unit>
+    public sealed class LoginUserHandler : BaseHandler<LoginUserCommand, Unit>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPasswordHasher _passwordHasher;

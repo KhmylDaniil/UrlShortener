@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Entities;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Entities;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик запроса получения пользователя по идентификатору
     /// </summary>
-    public class GetUserByIdHandler : BaseHandler<GetUserByIdQuery, GetUserByIdResponse>
+    public sealed class GetUserByIdHandler : BaseHandler<GetUserByIdQuery, GetUserByIdResponse>
     {
         public GetUserByIdHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext, authorizationService) { }
 

@@ -3,7 +3,7 @@ namespace UrlShortener.MVC.Models
     /// <summary>
     /// Модель прерывающей выполнение приложения ошибки
     /// </summary>
-    public class ErrorViewModel
+    public sealed class ErrorViewModel
     {
         /// <summary>
         /// Сообщение об ошибке

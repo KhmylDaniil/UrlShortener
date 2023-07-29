@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Entities;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Entities;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик команды удаления пользователя
     /// </summary>
-    public class DeleteUserHandler : BaseHandler<DeleteUserCommand, Unit>
+    public sealed class DeleteUserHandler : BaseHandler<DeleteUserCommand, Unit>
     {
         public DeleteUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext, authorizationService) { }
 

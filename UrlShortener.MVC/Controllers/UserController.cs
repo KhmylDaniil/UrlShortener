@@ -1,11 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Models.UserModels;
 
 namespace UrlShortener.MVC.Controllers
 {
-    public class UserController : BaseController
+    /// <summary>
+    /// Контроллер методов работы с пользователями
+    /// </summary>
+    public sealed class UserController : BaseController
     {
         public UserController(ISender sender) : base(sender) { }
 
@@ -17,13 +19,11 @@ namespace UrlShortener.MVC.Controllers
 
                 return View(response);
             }
-            catch (RequestValidationException ex)
+            catch (Exception ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
-
-                return View(await _sender.Send(new GetUserQuery(), cancellationToken));
+                return await HandleExceptionAsync<UserController>(ex, async () =>
+                    View(await _sender.Send(new GetUserQuery(), cancellationToken)));
             }
-            catch (Exception ex) { return RedirectToErrorPage<UserController>(ex); }
         }
 
         public async Task<IActionResult> Details(GetUserByIdQuery request, CancellationToken cancellationToken)
@@ -34,15 +34,12 @@ namespace UrlShortener.MVC.Controllers
 
                 return View(response);
             }
-            catch (RequestValidationException ex)
+            catch (Exception ex) 
             {
-                TempData["ErrorMessage"] = ex.Message;
-
-                return View(await _sender.Send(new GetUserQuery(), cancellationToken));
+                return await HandleExceptionAsync<UserController>(ex, async () =>
+                    View(await _sender.Send(new GetUserQuery(), cancellationToken)));
             }
-            catch (Exception ex) { return RedirectToErrorPage<UserController>(ex); }
         }
-
 
         public ActionResult Edit(EditUserCommand command) => View(command);
 
@@ -56,12 +53,7 @@ namespace UrlShortener.MVC.Controllers
 
                 return RedirectToAction(nameof(Details), new GetUserByIdQuery() { Id = command.Id });
             }
-            catch (RequestValidationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return View(command);
-            }
-            catch (Exception ex) { return RedirectToErrorPage<UserController>(ex); }
+            catch (Exception ex) { return HandleException<UserController>(ex, () => View(command)); }
         }
 
         public ActionResult Delete(DeleteUserCommand command) => View(command);
@@ -76,12 +68,7 @@ namespace UrlShortener.MVC.Controllers
 
                 return RedirectToAction(nameof(Index), new GetUserQuery());
             }
-            catch (RequestValidationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return View(command);
-            }
-            catch (Exception ex) { return RedirectToErrorPage<UserController>(ex); }
+            catch (Exception ex) { return HandleException<UserController>(ex, () => View(command)); }
         }
     }
 }

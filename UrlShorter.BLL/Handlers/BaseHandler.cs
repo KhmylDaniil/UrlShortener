@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using UrlShorter.BLL.Abstractions;
+using UrlShortener.BLL.Abstractions;
 
-namespace UrlShorter.BLL.Handlers
+namespace UrlShortener.BLL.Handlers
 {
     /// <summary>
     /// Базовый обработчик команд

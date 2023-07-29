@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UrlShorter.BLL.Constants;
+using UrlShortener.BLL.Constants;
 
-namespace UrlShorter.BLL.Entities
+namespace UrlShortener.BLL.Entities
 {
     /// <summary>
     /// Пользователь
     /// </summary>
-    public class User : EntityBase
+    public sealed class User : EntityBase
     {
         protected User() { }
 

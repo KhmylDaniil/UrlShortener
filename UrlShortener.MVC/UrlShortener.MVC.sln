@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.MVC", "UrlShortener.MVC.csproj", "{AF3C4715-54CB-4A16-8AE1-D187AD9A8E7E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{37A1A378-760C-44BC-B03A-DF83A02D6B0A} = {37A1A378-760C-44BC-B03A-DF83A02D6B0A}
+		{5CA0E455-F0CC-4A49-9771-AD8DE7BA81B1} = {5CA0E455-F0CC-4A49-9771-AD8DE7BA81B1}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.DAL", "..\UrlShortener.DAL\UrlShortener.DAL.csproj", "{37A1A378-760C-44BC-B03A-DF83A02D6B0A}"
@@ -13,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.DAL", "..\UrlS
 		{5CA0E455-F0CC-4A49-9771-AD8DE7BA81B1} = {5CA0E455-F0CC-4A49-9771-AD8DE7BA81B1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShorter.BLL", "..\UrlShorter.BLL\UrlShorter.BLL.csproj", "{5CA0E455-F0CC-4A49-9771-AD8DE7BA81B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.BLL", "..\UrlShorter.BLL\UrlShortener.BLL.csproj", "{5CA0E455-F0CC-4A49-9771-AD8DE7BA81B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

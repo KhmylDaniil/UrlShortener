@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Entities;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Entities;
 
 namespace UrlShortener.DAL
 {

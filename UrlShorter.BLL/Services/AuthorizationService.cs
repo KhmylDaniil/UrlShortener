@@ -1,13 +1,13 @@
-﻿using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Constants;
-using UrlShorter.BLL.Exceptions;
+﻿using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Constants;
+using UrlShortener.BLL.Exceptions;
 
-namespace UrlShorter.BLL.Services
+namespace UrlShortener.BLL.Services
 {
     /// <summary>
     /// Сервис проверки авторизации пользователей
     /// </summary>
-    public class AuthorizationService : IAuthorizationService
+    public sealed class AuthorizationService : IAuthorizationService
     {
         private readonly IUserContext _userContext;
 

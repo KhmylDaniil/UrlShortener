@@ -1,11 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Models.UserModels;
 
 namespace UrlShortener.MVC.Controllers
 {
-    public class LoginController : BaseController
+    /// <summary>
+    /// Контроллер авторизации
+    /// </summary>
+    public sealed class LoginController : BaseController
     {
         public LoginController(ISender sender) : base(sender) { }
 
@@ -25,12 +27,7 @@ namespace UrlShortener.MVC.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-            catch (RequestValidationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return View();
-            }
-            catch (Exception ex) { return RedirectToErrorPage<LoginController>(ex); }
+            catch (Exception ex) { return HandleException<LoginController>(ex, () => View(request)); }
         }
 
         public IActionResult Login() => View();
@@ -45,12 +42,7 @@ namespace UrlShortener.MVC.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-            catch (RequestValidationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return View();
-            }
-            catch (Exception ex) { return RedirectToErrorPage<LoginController>(ex); }
+            catch (Exception ex) { return HandleException<LoginController>(ex, View); }
         }
     }
 }

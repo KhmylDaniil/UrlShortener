@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Constants;
-using UrlShorter.BLL.Exceptions;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Constants;
+using UrlShortener.BLL.Exceptions;
 
-namespace UrlShorter.BLL.Services
+namespace UrlShortener.BLL.Services
 {
     /// <summary>
     /// Сервис доступа к идентификатору и роли текущего пользователя
     /// </summary>
-    public class UserContext : IUserContext
+    public sealed class UserContext : IUserContext
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 

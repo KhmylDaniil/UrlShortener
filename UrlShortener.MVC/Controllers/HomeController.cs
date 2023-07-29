@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UrlShortener.MVC.Controllers
 {
-    public class HomeController : BaseController
+    /// <summary>
+    /// Контроллер главной страницы
+    /// </summary>
+    public sealed class HomeController : BaseController
     {
         public HomeController(ISender sender) : base(sender) { }
         

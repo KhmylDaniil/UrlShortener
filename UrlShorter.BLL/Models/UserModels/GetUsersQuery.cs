@@ -1,11 +1,11 @@
 ﻿using MediatR;
 
-namespace UrlShorter.BLL.Models
+namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Запрос списка пользователей с фильтром
     /// </summary>
-    public class GetUserQuery : IRequest<IEnumerable<GetUsersResponse>>
+    public sealed class GetUserQuery : IRequest<IEnumerable<GetUsersResponse>>
     {
         /// <summary>
         /// Фильтр по имени

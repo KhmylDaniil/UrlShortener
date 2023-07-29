@@ -1,4 +1,4 @@
-﻿namespace UrlShorter.BLL.Exceptions
+﻿namespace UrlShortener.BLL.Exceptions
 {
     /// <summary>
     /// Базовая ошибка приложения

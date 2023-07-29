@@ -1,4 +1,4 @@
-﻿namespace UrlShorter.BLL.Entities
+﻿namespace UrlShortener.BLL.Entities
 {
     /// <summary>
     /// Базовая сущность

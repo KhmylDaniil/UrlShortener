@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UrlShorter.BLL.Entities;
+using UrlShortener.BLL.Entities;
 
 namespace UrlShortener.DAL.Configurations
 {

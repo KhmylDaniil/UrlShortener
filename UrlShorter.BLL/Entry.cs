@@ -1,10 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Services;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Services;
 
-namespace UrlShorter.BLL
+namespace UrlShortener.BLL
 {
     public static class Entry
     {
@@ -21,6 +25,10 @@ namespace UrlShorter.BLL
             services.AddScoped<IAuthorizationService, AuthorizationService>();
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Entry).Assembly));
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssembly(typeof(Validators.UserModels.LoginUserCommandValidator).Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
     }
 }

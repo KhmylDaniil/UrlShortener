@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик запроса списка пользователей
     /// </summary>
-    public class GetUserHandler : BaseHandler<GetUserQuery, IEnumerable<GetUsersResponse>>
+    public sealed class GetUserHandler : BaseHandler<GetUserQuery, IEnumerable<GetUsersResponse>>
     {
         public GetUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext, authorizationService) { }
 
