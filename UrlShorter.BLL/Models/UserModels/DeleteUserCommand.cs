@@ -1,11 +1,11 @@
 ﻿using MediatR;
 
-namespace UrlShorter.BLL.Models
+namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Команда удаления пользователя
     /// </summary>
-    public class DeleteUserCommand : IRequest<Unit>
+    public sealed class DeleteUserCommand : IRequest<Unit>
     {
         /// <summary>
         /// Идентификатор пользователя

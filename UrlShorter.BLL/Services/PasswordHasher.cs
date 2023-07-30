@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Exceptions;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Exceptions;
 
-namespace UrlShorter.BLL.Services
+namespace UrlShortener.BLL.Services
 {
     /// <summary>
     /// Реализация сервиса хеширования паролей
     /// </summary>
-    public class PasswordHasher : IPasswordHasher
+    public sealed class PasswordHasher : IPasswordHasher
     {
         private readonly string _salt;
 

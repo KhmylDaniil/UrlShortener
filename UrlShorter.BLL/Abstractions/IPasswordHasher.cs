@@ -1,5 +1,5 @@
 ﻿
-namespace UrlShorter.BLL.Abstractions
+namespace UrlShortener.BLL.Abstractions
 {
     /// <summary>
     /// Сервис для хеширования пароля

@@ -1,10 +1,9 @@
-﻿
-namespace UrlShorter.BLL.Models
+﻿namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Ответ на запрос пользователя по идентефикатору
     /// </summary>
-    public class GetUserByIdResponse : GetUsersResponse
+    public sealed class GetUserByIdResponse : GetUsersResponse
     {
         /// <summary>
         /// Логин

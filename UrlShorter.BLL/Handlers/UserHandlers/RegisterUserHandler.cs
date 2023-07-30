@@ -1,15 +1,16 @@
-﻿using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Constants;
-using UrlShorter.BLL.Entities;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+﻿using MediatR;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Constants;
+using UrlShortener.BLL.Entities;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик команды регистрации пользователя
     /// </summary>
-    public class RegisterUserHandler : BaseHandler<RegisterUserCommand, Guid>
+    public sealed class RegisterUserHandler : BaseHandler<RegisterUserCommand, Unit>
     {
         private readonly IPasswordHasher _passwordHasher;
 
@@ -19,7 +20,7 @@ namespace UrlShorter.BLL.Handlers.UserHandlers
             _passwordHasher = passwordHasher;
         }
 
-        public override async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             if (_appDbContext.Users.Any(x => x.Login == request.Login))
                 throw new RequestValidationException("Пользователь с таким логином уже зарегистрирован.");
@@ -32,7 +33,7 @@ namespace UrlShorter.BLL.Handlers.UserHandlers
 
             await _appDbContext.Users.AddAsync(user, cancellationToken);
             await _appDbContext.SaveChangesAsync(cancellationToken);
-            return user.Id;
+            return Unit.Value;
         }
     }
 }

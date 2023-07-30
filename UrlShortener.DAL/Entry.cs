@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Exceptions;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Exceptions;
 
 namespace UrlShortener.DAL
 {

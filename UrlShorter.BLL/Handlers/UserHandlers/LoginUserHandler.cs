@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using UrlShorter.BLL.Abstractions;
-using UrlShorter.BLL.Exceptions;
-using UrlShorter.BLL.Models;
+using UrlShortener.BLL.Abstractions;
+using UrlShortener.BLL.Exceptions;
+using UrlShortener.BLL.Models.UserModels;
 
-namespace UrlShorter.BLL.Handlers.UserHandlers
+namespace UrlShortener.BLL.Handlers.UserHandlers
 {
     /// <summary>
     /// Обработчик команды авторизации пользователя
     /// </summary>
-    public class LoginUserHandler : BaseHandler<LoginUserCommand, Unit>
+    public sealed class LoginUserHandler : BaseHandler<LoginUserCommand, Unit>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPasswordHasher _passwordHasher;
@@ -33,12 +33,16 @@ namespace UrlShorter.BLL.Handlers.UserHandlers
         {
             var existingUser = await _appDbContext.Users
                 .FirstOrDefaultAsync(x => x.Login == request.Login, cancellationToken)
-                ?? throw new ApplicationSystemBaseException("Логин не найден");
+                ?? throw new RequestValidationException("Логин не найден");
 
             if (!_passwordHasher.VerifyHash(request.Password, existingUser.PasswordHash))
-                throw new ApplicationSystemBaseException("Неверный пароль.");
+                throw new RequestValidationException("Неверный пароль.");
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, existingUser.Id.ToString()) };
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, existingUser.Id.ToString()),
+                new Claim(ClaimTypes.Role, Enum.GetName(existingUser.RoleType))
+            };
 
             ClaimsIdentity claimsIdentity = new(claims, "Cookies");
 

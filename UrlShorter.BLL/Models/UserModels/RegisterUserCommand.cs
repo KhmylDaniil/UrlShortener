@@ -1,33 +1,26 @@
 ﻿using MediatR;
-using System.ComponentModel.DataAnnotations;
 
-namespace UrlShorter.BLL.Models
+namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Команда создания пользователя
     /// </summary>
-    public class RegisterUserCommand : IRequest<Guid>
+    public sealed class RegisterUserCommand : IRequest<Unit>
     {
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        [Required]
-        [MaxLength(12)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Логин
         /// </summary>
-        [Required]
-        [MaxLength(12)]
-        public string Login { get; set; }
+        public string? Login { get; set; }
 
         /// <summary>
         /// Пароль
         /// </summary>
-        [Required]
-        [MaxLength(20)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// Зарегистрировать в качестве админа

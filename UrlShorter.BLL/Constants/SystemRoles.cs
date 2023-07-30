@@ -1,5 +1,5 @@
 ﻿
-namespace UrlShorter.BLL.Constants
+namespace UrlShortener.BLL.Constants
 {
     /// <summary>
     /// Тип роли пользователя

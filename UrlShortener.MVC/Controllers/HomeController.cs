@@ -1,32 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using UrlShortener.MVC.Models;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UrlShortener.MVC.Controllers
 {
-    public class HomeController : Controller
+    /// <summary>
+    /// Контроллер главной страницы
+    /// </summary>
+    public sealed class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        public HomeController(ISender sender) : base(sender) { }
+        
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

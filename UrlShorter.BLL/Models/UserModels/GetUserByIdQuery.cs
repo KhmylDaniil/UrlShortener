@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace UrlShorter.BLL.Models
+namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Запрос пользователя по идентификатору

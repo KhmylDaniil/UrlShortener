@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UrlShorter.BLL.Entities
+namespace UrlShortener.BLL.Entities
 {
     /// <summary>
     /// Запись Url в базе данных
     /// </summary>
-    public class UrlRecord : EntityBase
+    public sealed class UrlRecord : EntityBase
     {
         /// <summary>
         /// Короткая запись

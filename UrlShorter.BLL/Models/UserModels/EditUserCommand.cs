@@ -1,12 +1,11 @@
 ﻿using MediatR;
-using System.ComponentModel.DataAnnotations;
 
-namespace UrlShorter.BLL.Models
+namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Команда на изменение пользователя
     /// </summary>
-    public class EditUserCommand : IRequest<Unit>
+    public sealed class EditUserCommand : IRequest<Unit>
     {
         /// <summary>
         /// Идентификатор пользователя
@@ -16,8 +15,7 @@ namespace UrlShorter.BLL.Models
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Смена роли

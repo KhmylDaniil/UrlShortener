@@ -1,6 +1,6 @@
-﻿using UrlShorter.BLL.Constants;
+﻿using UrlShortener.BLL.Constants;
 
-namespace UrlShorter.BLL.Models
+namespace UrlShortener.BLL.Models.UserModels
 {
     /// <summary>
     /// Элемент ответа на запрос списка пользователей

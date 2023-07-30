@@ -1,6 +1,6 @@
-﻿using UrlShorter.BLL.Constants;
+﻿using UrlShortener.BLL.Constants;
 
-namespace UrlShorter.BLL.Abstractions
+namespace UrlShortener.BLL.Abstractions
 {
     /// <summary>
     /// Сервис доступа к идентификатору и роли текущего пользователя

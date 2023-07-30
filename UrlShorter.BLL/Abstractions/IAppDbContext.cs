@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UrlShorter.BLL.Entities;
+using UrlShortener.BLL.Entities;
 
-namespace UrlShorter.BLL.Abstractions
+namespace UrlShortener.BLL.Abstractions
 {
     /// <summary>
     /// Контекст базы данных

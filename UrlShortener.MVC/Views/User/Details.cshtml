@@ -1,0 +1,50 @@
+﻿@model UrlShortener.BLL.Models.UserModels.GetUserByIdResponse
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.RegistrationDateTime)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.RegistrationDateTime)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.UrlRecordsCount)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.UrlRecordsCount)
+        </dd>
+    </dl>
+</div>
+
+<p>@TempData["ErrorMessage"]</p>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id, name = Model.Name }) | @Html.ActionLink("Delete", "Delete", new { id = Model.Id, name = Model.Name })
+    <a asp-action="Index">Back</a>
+</div>
