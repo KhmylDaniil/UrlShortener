@@ -20,10 +20,9 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
 
         public LoginUserHandler(
             IAppDbContext appDbContext,
-            IAuthorizationService authorizationService,
             IPasswordHasher passwordHasher,
             IHttpContextAccessor httpContextAccessor)
-            : base(appDbContext, authorizationService)
+            : base(appDbContext)
         {
             _httpContextAccessor = httpContextAccessor;
             _passwordHasher = passwordHasher;

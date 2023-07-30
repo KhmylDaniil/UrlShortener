@@ -21,6 +21,8 @@ namespace UrlShortener.MVC
             services.AddTransient<IUserContext, UserContext>();
 
             services.AddBLLServices(configuration);
+
+            services.AddHttpClient<CustomHttpClient>();
         }
     }
 }

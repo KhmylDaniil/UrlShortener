@@ -12,14 +12,17 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
     /// </summary>
     public sealed class EditUserHandler : BaseHandler<EditUserCommand, Unit>
     {
+        private readonly IAuthorizationService _authorizationService;
+
         private readonly IPasswordHasher _passwordHasher;
         public EditUserHandler(
             IAppDbContext appDbContext,
             IAuthorizationService authorizationService,
             IPasswordHasher passwordHasher)
-            : base(appDbContext, authorizationService)
+            : base(appDbContext)
         {
             _passwordHasher = passwordHasher;
+            _authorizationService = authorizationService;
         }
 
         public async override Task<Unit> Handle(EditUserCommand request, CancellationToken cancellationToken)

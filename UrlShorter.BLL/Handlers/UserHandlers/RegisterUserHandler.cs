@@ -14,8 +14,7 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
     {
         private readonly IPasswordHasher _passwordHasher;
 
-        public RegisterUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService, IPasswordHasher passwordHasher)
-            : base(appDbContext, authorizationService)
+        public RegisterUserHandler(IAppDbContext appDbContext, IPasswordHasher passwordHasher) : base(appDbContext)
         {
             _passwordHasher = passwordHasher;
         }

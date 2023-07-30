@@ -12,5 +12,10 @@ namespace UrlShortener.BLL.Exceptions
             : base($"Не найдена сущность {typeof(T)} с ИД {id}.")
         {
         }
+
+        public EntityNotFoundException()
+            : base($"Не найдена сущность {typeof(T)}.")
+        {
+        }
     }
 }

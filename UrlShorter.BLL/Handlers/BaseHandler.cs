@@ -9,12 +9,10 @@ namespace UrlShortener.BLL.Handlers
     public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
         protected readonly IAppDbContext _appDbContext;
-        protected readonly IAuthorizationService _authorizationService;
 
-        protected BaseHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService)
+        protected BaseHandler(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            _authorizationService = authorizationService;
         }
 
         public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
