@@ -32,8 +32,8 @@ namespace UrlShortener.BLL.Handlers.UrlHandlers
             {
                 if (currentUser is not null)
                 {
-                    existingRecord.Users.Add(currentUser);
                     currentUser.UrlRecordsCount++;
+                    existingRecord.Users.Add(currentUser);
                 }
             }
             else
@@ -47,7 +47,7 @@ namespace UrlShortener.BLL.Handlers.UrlHandlers
             return shortUrl;
         }
 
-        string ToShortUrl(string url)
+        static string ToShortUrl(string url)
         {
             byte[] urlAsBytes = Encoding.ASCII.GetBytes(url);
             string urlAsHex = Convert.ToHexString(urlAsBytes);

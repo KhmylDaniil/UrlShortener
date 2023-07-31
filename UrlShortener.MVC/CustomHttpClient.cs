@@ -17,9 +17,12 @@ namespace UrlShortener.MVC
         /// <returns></returns>
         public async Task HealthCheckAsync(string uri, CancellationToken cancellationToken)
         {
+            if (!Uri.IsWellFormedUriString(uri, UriKind.Absolute))
+                throw new NotValidLongUrlException();
+
             var response = await _httpClient.GetAsync(uri, cancellationToken);
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
                 throw new NotValidLongUrlException();
         }
     }

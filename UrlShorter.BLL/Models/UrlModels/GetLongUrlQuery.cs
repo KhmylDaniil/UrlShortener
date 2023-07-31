@@ -11,5 +11,7 @@ namespace UrlShortener.BLL.Models.UrlModels
         /// Короткий Url
         /// </summary>
         public string ShortUrl { get; init; }
+
+        public GetLongUrlQuery(string url) => ShortUrl = url;
     }
 }

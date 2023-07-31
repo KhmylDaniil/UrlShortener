@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.BLL.Models.UrlModels;
-using UrlShortener.BLL.Models.UserModels;
 
 namespace UrlShortener.MVC.Controllers
 {
@@ -22,19 +21,18 @@ namespace UrlShortener.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateShortUrl(CreateUrlRecordCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Index(CreateUrlRecordCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await _httpClient.HealthCheckAsync(request.LongUrl, cancellationToken);
 
-                await _sender.Send(request, cancellationToken);
+                var newUrl = await _sender.Send(request, cancellationToken);
+                ViewData["NewShortUrl"] = BLL.Constants.BaseAddress.HttpAddress + newUrl;
 
-                return RedirectToAction("Index", "Home");
+                return View();
             }
             catch (Exception ex) { return HandleException<HomeController>(ex, () => View(request)); }
         }
-
-
     }
 }
