@@ -10,8 +10,10 @@ namespace UrlShortener.MVC
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMvcCore().AddRazorViewEngine();
+            services.AddControllers();
+
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddSqlStorage(configuration);
 
@@ -21,7 +23,6 @@ namespace UrlShortener.MVC
             services.AddTransient<IUserContext, UserContext>();
 
             services.AddBLLServices(configuration);
-
             services.AddHttpClient<CustomHttpClient>();
         }
     }

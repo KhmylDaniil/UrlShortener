@@ -9,12 +9,12 @@ namespace UrlShortener.BLL.Exceptions
     public sealed class EntityNotFoundException<T> : ApplicationSystemBaseException where T : EntityBase
     {
         public EntityNotFoundException(Guid id)
-            : base($"Не найдена сущность {typeof(T)} с ИД {id}.")
+            : base($"Не найдена сущность {typeof(T).Name} с ИД {id}.")
         {
         }
 
         public EntityNotFoundException()
-            : base($"Не найдена сущность {typeof(T)}.")
+            : base($"Не найдена сущность {typeof(T).Name}.")
         {
         }
     }

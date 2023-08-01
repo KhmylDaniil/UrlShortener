@@ -7,7 +7,7 @@
     public sealed class ApplicationSystemNullException<T> : ApplicationSystemBaseException
     {
         public ApplicationSystemNullException(string argument)
-            : base($"При работе класса {typeof(T)} отсутствует необходимый параметр {argument}.")
+            : base($"При работе класса {typeof(T).Name} отсутствует необходимый параметр {argument}.")
         {
         }
     }
