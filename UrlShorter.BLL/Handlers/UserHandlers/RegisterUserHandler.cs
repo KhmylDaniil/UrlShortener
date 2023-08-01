@@ -22,7 +22,7 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
         public override async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             if (_appDbContext.Users.Any(x => x.Login == request.Login))
-                throw new RequestValidationException("Пользователь с таким логином уже зарегистрирован.");
+                throw new RequestValidationException(ExceptionMessages.NotUniqueLogin);
 
             var user = new User(
                 name: request.Name,

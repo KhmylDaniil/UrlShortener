@@ -10,21 +10,21 @@ namespace UrlShortener.BLL.Models.UserModels
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string? Name { get; set; }
+        public string? Name { get; init; }
 
         /// <summary>
         /// Логин
         /// </summary>
-        public string? Login { get; set; }
+        public string? Login { get; init; }
 
         /// <summary>
         /// Пароль
         /// </summary>
-        public string? Password { get; set; }
+        public string? Password { get; init; }
 
         /// <summary>
         /// Зарегистрировать в качестве админа
         /// </summary>
-        public bool AsAdmin { get; set; }
+        public bool AsAdmin { get; init; }
     }
 }
