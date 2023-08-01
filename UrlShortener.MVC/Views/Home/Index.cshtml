@@ -1,7 +1,50 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model UrlShortener.BLL.Models.UrlModels.CreateUrlRecordCommand
+
+@{
+    ViewData["Title"] = "Url Shortener";
 }
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LongUrl" class="control-label">Enter url here</label>
+                <input asp-for="LongUrl" class="form-control" />
+                <span asp-validation-for="LongUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Shorter" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewData["NewShortUrl"] is not null)
+{
+    <p>Short url is: </p>
+    <input type="text" value="@ViewData["NewShortUrl"]" id="myInput">
+    <input type="button" onclick="myFunction()" value="Copy" class="btn btn-primary" />
+}
+
+
+    <p>@TempData["ErrorMessage"]</p>
 
 <div>
     <a asp-controller="User" asp-action="Index">Users</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    function myFunction() {
+        var copyText = document.getElementById("myInput");
+
+        copyText.select();
+
+        document.execCommand("copy");
+    }
+</script>
+

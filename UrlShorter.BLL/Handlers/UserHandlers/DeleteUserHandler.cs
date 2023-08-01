@@ -12,7 +12,12 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
     /// </summary>
     public sealed class DeleteUserHandler : BaseHandler<DeleteUserCommand, Unit>
     {
-        public DeleteUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext, authorizationService) { }
+        private readonly IAuthorizationService _authorizationService;
+
+        public DeleteUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService): base(appDbContext)
+        {
+            _authorizationService = authorizationService;
+        }
 
         public async override Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {

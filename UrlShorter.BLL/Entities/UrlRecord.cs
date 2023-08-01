@@ -7,10 +7,19 @@ namespace UrlShortener.BLL.Entities
     /// </summary>
     public sealed class UrlRecord : EntityBase
     {
+        private UrlRecord() { }
+        
+        public UrlRecord(string shortUrl, string longUrl, User? user)
+        {
+            ShortUrl = shortUrl;
+            LongUrl = longUrl;
+            
+            Users = user is null ? new() : new() { user} ;
+        }
+
         /// <summary>
         /// Короткая запись
         /// </summary>
-        [StringLength(6)]
         public string ShortUrl { get; set; }
 
         /// <summary>

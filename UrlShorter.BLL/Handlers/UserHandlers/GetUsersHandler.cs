@@ -9,7 +9,12 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
     /// </summary>
     public sealed class GetUserHandler : BaseHandler<GetUserQuery, IEnumerable<GetUsersResponse>>
     {
-        public GetUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext, authorizationService) { }
+        private readonly IAuthorizationService _authorizationService;
+
+        public GetUserHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext)
+        {
+            _authorizationService = authorizationService;
+        }
 
         public async override Task<IEnumerable<GetUsersResponse>> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {

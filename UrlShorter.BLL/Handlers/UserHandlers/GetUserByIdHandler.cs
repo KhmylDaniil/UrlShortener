@@ -11,7 +11,12 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
     /// </summary>
     public sealed class GetUserByIdHandler : BaseHandler<GetUserByIdQuery, GetUserByIdResponse>
     {
-        public GetUserByIdHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext, authorizationService) { }
+        private readonly IAuthorizationService _authorizationService;
+
+        public GetUserByIdHandler(IAppDbContext appDbContext, IAuthorizationService authorizationService) : base(appDbContext)
+        {
+            _authorizationService = authorizationService;
+        }
 
         public async override Task<GetUserByIdResponse> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
