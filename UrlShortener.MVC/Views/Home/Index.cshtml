@@ -31,9 +31,12 @@
 
     <p>@TempData["ErrorMessage"]</p>
 
-<div>
-    <a asp-controller="User" asp-action="Index">Users</a>
-</div>
+@if (ViewData["IsAdmin"] is true)
+{
+    <div>
+        <a asp-controller="User" asp-action="Index">Users</a>
+    </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
