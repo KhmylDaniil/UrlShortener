@@ -40,10 +40,7 @@ namespace Tests.UrlRequests
         [TestMethod]
         public async Task Handle_DeleteUrlRecords_ShouldDeleteOneRecord()
         {
-            var request = new DeleteUrlRecordsCommand()
-            {
-               UserId = _user.Id
-            };
+            var request = new DeleteUrlRecordsCommand(_user.Id, null);
 
             var newHandler = new DeleteUrlRecordsHandler(_appDbContext, AuthorizationService.Object, DateTimeProvider.Object);
 
@@ -64,10 +61,7 @@ namespace Tests.UrlRequests
         [TestMethod]
         public async Task Handle_DeleteUrlRecords_ShouldDeleteBothRecords()
         {
-            var request = new DeleteUrlRecordsCommand()
-            {
-                Days = 1,
-            };
+            var request = new DeleteUrlRecordsCommand(null, 1);
 
             var newHandler = new DeleteUrlRecordsHandler(_appDbContext, AuthorizationService.Object, DateTimeProvider.Object);
 
