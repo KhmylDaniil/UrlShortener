@@ -40,6 +40,11 @@ namespace Tests
         protected Mock<IPasswordHasher> PasswordHasher { get; private set; }
 
         /// <summary>
+        /// Провайдер даты и времени
+        /// </summary>
+        protected Mock<IDateTimeProvider> DateTimeProvider { get; private set; }
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public UnitTestBase()
@@ -54,6 +59,9 @@ namespace Tests
             PasswordHasher = new Mock<IPasswordHasher>();
             PasswordHasher.Setup(x => x.Hash(It.IsAny<string>())).Returns("foo");
             PasswordHasher.Setup(x => x.VerifyHash(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+
+            DateTimeProvider = new Mock<IDateTimeProvider>();
+            DateTimeProvider.Setup(x => x.Now).Returns(new DateTime(2022, 1, 10));
         }
 
         /// <summary>
@@ -67,12 +75,12 @@ namespace Tests
                 .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
-            using (var context = new AppDbContext(options, UserContext.Object))
+            using (var context = new AppDbContext(options, UserContext.Object, DateTimeProvider.Object))
             {
                 dbSeeder?.Invoke(context);
                 context.SaveChangesAsync().GetAwaiter().GetResult();
             }
-            return new AppDbContext(options, UserContext.Object);
+            return new AppDbContext(options, UserContext.Object, DateTimeProvider.Object);
         }
 
         /// <inheritdoc/>
