@@ -13,7 +13,7 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
     /// <summary>
     /// Обработчик команды авторизации пользователя
     /// </summary>
-    public sealed class LoginUserHandler : BaseHandler<LoginUserCommand, Unit>
+    public class LoginUserHandler : BaseHandler<LoginUserCommand, Unit>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPasswordHasher _passwordHasher;
@@ -32,10 +32,10 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
         {
             var existingUser = await _appDbContext.Users
                 .FirstOrDefaultAsync(x => x.Login == request.Login, cancellationToken)
-                ?? throw new RequestValidationException("Логин не найден");
+                ?? throw new RequestValidationException(Constants.ExceptionMessages.LoginInccorrect);
 
             if (!_passwordHasher.VerifyHash(request.Password, existingUser.PasswordHash))
-                throw new RequestValidationException("Неверный пароль.");
+                throw new RequestValidationException(Constants.ExceptionMessages.PasswordInccorrect);
 
             var claims = new List<Claim>
             {
@@ -45,10 +45,15 @@ namespace UrlShortener.BLL.Handlers.UserHandlers
 
             ClaimsIdentity claimsIdentity = new(claims, "Cookies");
 
-            await _httpContextAccessor.HttpContext
-                .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            await SignCookiesAsync(_httpContextAccessor.HttpContext, new ClaimsPrincipal(claimsIdentity));
 
             return Unit.Value;
         }
+
+        /// <summary>
+		/// Выделение метода расширения для возможности переопределения его поведения в тестах 
+		/// </summary>
+		protected virtual async Task SignCookiesAsync(HttpContext httpContext, ClaimsPrincipal claimsPrincipal)
+            => await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
     }
 }

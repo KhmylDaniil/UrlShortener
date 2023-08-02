@@ -23,6 +23,7 @@ namespace UrlShortener.BLL
             services.AddTransient<IPasswordHasher>(o => new PasswordHasher(salt));
 
             services.AddScoped<IAuthorizationService, AuthorizationService>();
+            services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Entry).Assembly));
 

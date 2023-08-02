@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using UrlShortener.BLL.Abstractions;
 using UrlShortener.BLL.Entities;
 using UrlShortener.BLL.Exceptions;
 using UrlShortener.BLL.Models.UrlModels;
@@ -13,16 +14,25 @@ namespace UrlShortener.MVC.Controllers
     public sealed class HomeController : BaseController
     {
         private readonly CustomHttpClient _httpClient;
-        public HomeController(ISender sender, CustomHttpClient httpClient) : base(sender)
+        private readonly IUserContext _userContext;
+
+        public HomeController(ISender sender, CustomHttpClient httpClient, IUserContext userContext) : base(sender)
         {
             _httpClient = httpClient;
+            _userContext = userContext;
         }
 
         /// <summary>
         /// Вход на главную страницу
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            if (_userContext.RoleType == BLL.Constants.RoleType.Admin)
+                ViewData["IsAdmin"] = true;
+
+            return View();
+        }
 
         /// <summary>
         /// Получением длинного url для сокращения

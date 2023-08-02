@@ -19,12 +19,19 @@ namespace UrlShortener.DAL
         /// <inheritdoc/>
         private readonly IUserContext _userContext;
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        private readonly IDateTimeProvider _dateTimeProvider;
+
         public AppDbContext(
             DbContextOptions<AppDbContext> dbContextOptions,
-            IUserContext userContext)
+            IUserContext userContext,
+            IDateTimeProvider dateTimeProvider)
             : base(dbContextOptions)
         {
             _userContext = userContext;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         protected AppDbContext()
@@ -54,7 +61,7 @@ namespace UrlShortener.DAL
                 {
                     entityBase.Id = Guid.NewGuid();
                     entityBase.CreatedByUserId = _userContext.CurrentUserId;
-                    entityBase.CreatedOn = DateTime.UtcNow;
+                    entityBase.CreatedOn = _dateTimeProvider.Now;
                 }
 
             return await base.SaveChangesAsync(cancellationToken);

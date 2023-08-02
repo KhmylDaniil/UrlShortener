@@ -10,10 +10,8 @@ namespace UrlShortener.MVC
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
-
+            services.AddMvcCore().AddRazorViewEngine();
             services.AddControllersWithViews();
-            services.AddRazorPages();
 
             services.AddSqlStorage(configuration);
 
