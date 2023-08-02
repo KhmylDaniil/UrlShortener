@@ -27,7 +27,7 @@ namespace UrlShortener.MVC.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{shortUrl}")]
-        public async Task<IActionResult> RedirectToLongUrl(string shortUrl, CancellationToken cancellationToken)
+        public async Task<IActionResult> ToLongUrl(string shortUrl, CancellationToken cancellationToken)
         {
             GetLongUrlQuery query = new(shortUrl);
 
@@ -44,6 +44,28 @@ namespace UrlShortener.MVC.Controllers
 
                 return RedirectToAction("RedirectFromApiError", "Home");
             }
+        }
+
+        /// <summary>
+        /// Метод удаления ссылок из базы
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("[action]/{days}/{userId}")]
+        public async Task<IActionResult> Delete(int? days, Guid? userId, CancellationToken cancellationToken)
+        {
+            DeleteUrlRecordsCommand command = new(userId, days);
+            try
+            {
+                await _sender.Send(command, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                var myLog = Log.ForContext<UrlController>();
+                myLog.Error(ex.Message);
+
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
